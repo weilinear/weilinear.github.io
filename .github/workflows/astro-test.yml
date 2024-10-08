@@ -40,7 +40,7 @@ jobs:
     env:
       # BUILD_PATH: subfolder
       DATABASE_ID: ${{ secrets.DATABASE_ID }}
-      NOTION_API_SECRET: ${{ secrets.NOTION_API_SECRET }}
+      NOTION_KEY: ${{ secrets.NOTION_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
