@@ -10,7 +10,8 @@ import Newsletter from "../components/Newsletter.svelte";
 
 const { frontmatter } = Astro.props;
 
-const showProfileSubtitle = true; // TODO: Expose this as config option
+const showProfileSubtitle = false; // TODO: Expose this as config option
+const showProfileAtAll = false;
 let optimizedDesktopCoverImage: any = null;
 let optimizedMobileCoverImage: any = null;
 
@@ -63,12 +64,8 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
             <div
               class="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-white"
             >
-              <img
-                class="mr-4 h-16 w-16 rounded-full"
-                src="/images/portrait.webp"
-                alt="Fizzbuzz Aldrin"
-              />
-              {
+            { showProfileAtAll ? 
+              (
                 showProfileSubtitle ? (
                   <div>
                     <a
@@ -111,7 +108,19 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
                     </p>
                   </div>
                 )
-              }
+              ) : (
+              <div>
+                <p class="text-base text-gray-500 dark:text-gray-400">
+                  <time
+                    pubdate
+                    datetime={frontmatter.created_time}
+                    title={dateStr}
+                  >
+                    {dateStr}
+                  </time>
+                </p>
+              </div>
+            )}
             </div>
           </address>
 

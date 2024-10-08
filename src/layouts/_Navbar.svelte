@@ -19,7 +19,7 @@
   let activeUrl: string = "";
   let innerWidth: number;
 
-  const name = "AstroNot"; // TODO: Make this a param, site config
+  const name = "Wei Li"; // TODO: Make this a param, site config
 
   $: isHamburgerMenu = innerWidth < HAMBURGER_BREAKPOINT;
 
@@ -93,7 +93,7 @@
           <NavLi href="/blog">Blog</NavLi>
 
           <NavLi href="/contact">Contact</NavLi>
-          <NavLi href="https://github.com/jsonmartin/AstroNot" target="_blank"
+          <NavLi href="https://github.com/weilinear" target="_blank"
             >Github</NavLi
           >
         </NavUl>

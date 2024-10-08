@@ -10,7 +10,7 @@ import { PenSolid } from "flowbite-svelte-icons";
 const POSTS_PATH = "posts";
 const COVER_IMG_ASPECT_RATIO = "13/9"; // TODO: Expose as variable
 
-const { showTagsFilter = true } = Astro.props;
+const { showTagsFilter = true, showProfile = false } = Astro.props;
 
 const posts = await Astro.glob("./posts/*.mdx");
 
@@ -185,28 +185,43 @@ const tagsList = posts.reduce((acc, post) => {
                         />
 
                         {/* Author Section */}
-                        <div class="flex items-center space-x-3">
-                          <img
-                            class="h-11 w-11 rounded-full"
-                            src="/images/portrait.webp"
-                            alt="Buzz's avatar"
-                          />
-                          <div class="font-medium dark:text-white">
-                            <div>Fizzbuzz Aldrin</div>
-                            <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                              <span
-                                class={
-                                  !post.frontmatter.publish_date ? "hidden" : ""
-                                }
-                              >
-                                <span>{dateStr}</span>
-                                <span> · </span>
-                              </span>
-                              <span>{post.frontmatter.reading_time}</span>
+                        { showProfile ? (
+                          <div class="flex items-center space-x-3">
+                            <img
+                              class="h-11 w-11 rounded-full"
+                              src="/images/portrait.webp"
+                              alt="Buzz's avatar"
+                            />
+                            <div class="font-medium dark:text-white">
+                              <div>Fizzbuzz Aldrin</div>
+                              <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                <span
+                                  class={
+                                    !post.frontmatter.publish_date ? "hidden" : ""
+                                  }
+                                >
+                                  <span>{dateStr}</span>
+                                  <span> · </span>
+                                </span>
+                                <span>{post.frontmatter.reading_time}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                      ) : (
+                      <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                <span
+                                  class={
+                                    !post.frontmatter.publish_date ? "hidden" : ""
+                                  }
+                                >
+                                  <span>{dateStr}</span>
+                                  <span> · </span>
+                                </span>
+                                <span>{post.frontmatter.reading_time}</span>
+                              </div>
+
+                      )}
+                    </div>
                     </article>
                   </a>
                 );
