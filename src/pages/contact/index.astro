@@ -1,8 +1,50 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Contact from "./_Contact.svelte";
+import {
+  Section,
+  HeroHeader,
+  FeatureDefault,
+  FeatureItem,
+} from "flowbite-svelte-blocks";
+import { MailBoxSolid, TwitterSolid, LinkedinSolid } from "flowbite-svelte-icons";
 ---
 
 <Layout title="Contact">
-  <Contact client:load />
+  <Section name="feature">
+    <FeatureDefault>
+      <a href="mailto:weilinear@gmail.com">
+        <FeatureItem>
+          <svelte:fragment slot="icon">
+            <MailBoxSolid class="text-4xl" />
+          </svelte:fragment>
+          <svelte:fragment slot="h3">Email</svelte:fragment>
+          <svelte:fragment slot="paragraph">
+            Send me an email.
+          </svelte:fragment>
+        </FeatureItem>
+      </a>
+      <a href="https://twitter.com/weilinear">
+        <FeatureItem>
+          <svelte:fragment slot="icon">
+            <TwitterSolid class="text-4xl" />
+          </svelte:fragment>
+          <svelte:fragment slot="h3">Twitter</svelte:fragment>
+          <svelte:fragment slot="paragraph">
+            Follow me on Twitter.
+          </svelte:fragment>
+        </FeatureItem>
+      </a>
+      <a href="https://www.linkedin.com/in/weilinear/">
+        <FeatureItem>
+          <svelte:fragment slot="icon">
+            <LinkedinSolid class="text-4xl" />
+          </svelte:fragment>
+          <svelte:fragment slot="h3">LinkedIn</svelte:fragment>
+          <svelte:fragment slot="paragraph">
+            Connect with me on LinkedIn.
+          </svelte:fragment>
+        </FeatureItem>
+    </FeatureDefault>
+  </Section>
 </Layout>

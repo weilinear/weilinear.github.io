@@ -48,7 +48,7 @@
   </HeroHeader>
   </div>
   <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-    <img src="https://images.lemonly.com/wp-content/uploads/2017/06/27053708/Marriott_Seattle_Space_Needle_Final.gif" alt="mockup" object-fit="cover" layout="fill"/>
+    <img src="/images/zurich_and_seattle_1.png" alt="mockup" object-fit="cover" layout="fill"/>
   </div>
 </Section>
 

@@ -113,7 +113,7 @@
         <NavLi class="cursor-pointer" href="/blog">Blog</NavLi>
 
         <NavLi href="/about">About</NavLi>
-        <NavLi href="/contact">Contact</NavLi>
+        <!-- <NavLi href="/contact">Contact</NavLi> -->
       </NavUl>
     {/if}
   </Navbar>
