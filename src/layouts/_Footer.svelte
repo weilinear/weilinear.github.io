@@ -12,6 +12,7 @@
     GithubSolid,
     DiscordSolid,
     TwitterSolid,
+    LinkedinSolid
   } from "flowbite-svelte-icons";
   import { navbar } from "../stores/layout";
 
@@ -62,23 +63,15 @@
 
         <div class="mt-4 flex items-center justify-center space-x-6 sm:mt-0">
           <FooterIcon
-            href="https://github.com/jsonMartin/AstroNot"
+            href="https://linkedin.com/weilinear"
             target="_blank"
           >
-            <FacebookSolid
+            <LinkedinSolid
               class="h-4 w-4 text-gray-100 hover:scale-125 dark:text-gray-100 dark:hover:text-white"
             />
           </FooterIcon>
           <FooterIcon
-            href="https://github.com/jsonMartin/AstroNot"
-            target="_blank"
-          >
-            <DiscordSolid
-              class="h-4 w-4 text-gray-100 hover:scale-125 dark:text-gray-100 dark:hover:text-white"
-            />
-          </FooterIcon>
-          <FooterIcon
-            href="https://github.com/jsonMartin/AstroNot"
+            href="https://twitter.com/weilinear"
             target="_blank"
           >
             <TwitterSolid
@@ -86,7 +79,7 @@
             />
           </FooterIcon>
           <FooterIcon
-            href="https://github.com/jsonMartin/AstroNot"
+            href="https://github.com/weilinear"
             target="_blank"
           >
             <GithubSolid
