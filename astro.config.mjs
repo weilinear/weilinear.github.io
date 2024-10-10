@@ -3,6 +3,8 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import svelte from "@astrojs/svelte";
+import remarkMath from 'remark-math';
+import rehypeMathjax from 'rehype-mathjax';
 
 export default defineConfig({
   integrations: [react(), tailwind(), mdx(), svelte()],
@@ -14,5 +16,9 @@ export default defineConfig({
   },
   vite: {
     assetsInclude: ['**/*.bmp'], // Allow importing image types not allowed by default
+  },
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeMathjax],    
   }
 });

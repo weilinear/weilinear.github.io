@@ -10,7 +10,7 @@ import { PenSolid } from "flowbite-svelte-icons";
 const POSTS_PATH = "posts";
 const COVER_IMG_ASPECT_RATIO = "13/9"; // TODO: Expose as variable
 
-const { showTagsFilter = true, showProfile = false } = Astro.props;
+const { showTagsFilter = true, showProfile = false, showOnlyTag = null } = Astro.props;
 
 const posts = await Astro.glob("./posts/*.mdx");
 
@@ -50,7 +50,7 @@ const tagsList = posts.reduce((acc, post) => {
           </h2>
         </div>
 
-        {showTagsFilter && <TagsFilter tagsList={tagsList} client:load />}
+        {showTagsFilter && (showOnlyTag == null) && <TagsFilter tagsList={tagsList} client:load />}
 
         <div
           class="mt-8 grid items-center gap-8 md:grid-cols-2 lg:mt-16 xl:grid-cols-3"
