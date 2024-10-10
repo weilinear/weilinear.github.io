@@ -19,10 +19,9 @@
       <svelte:fragment slot="paragraph">
         <div class="block">
           <p>
-            <span class="font-bold text-primary-200">Wei Li</span>
-            I am currently working at Microsft as a Sr. Principal Applied Scientist.
-            I was staff research scientist and manager at NewsBreak (series C startup).
-            I was a senior research scientist at Facebook Seattle & Google Research
+            I am currently working at <span class="text-primary-200">Microsft</span> as a Sr. Principal Applied Scientist.
+            I was staff research scientist and manager at <span class="text-primary-200">NewsBreak</span> (series C startup).
+            I was a senior research scientist at <span class="text-primary-200">Facebook</span> Seattle & <span class="text-primary-200">Google</span> Research
             in Zurich, Switzerland with a focus on Computer Vision and Ads ranking.
           </p>
           &nbsp;

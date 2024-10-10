@@ -72,6 +72,34 @@ n2m.setCustomTransformer("video", async (block) => {
 
   return `<iframe width="100%" height="480" src="${url}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
 });
+
+n2m.setCustomTransformer('link_preview', async (block) => {
+  const { link_preview } = block;
+  const { url } = link_preview;
+
+  const response = await fetch(url);
+  const html = await response.text();
+  const doc = domino.createWindow(html).document;
+  const metadata = getMetadata(doc, url);
+
+  console.log({ metadata });
+
+  const preview = metadata.image
+    ? `<img src="${metadata.image}" alt="${metadata.title}" />`
+    : `<div style="display: flex; align-items: center; padding: 10px 10px">
+        <img style="margin-right: 10px;" src="${metadata.icon}" />
+        <span>${metadata.title}</span>
+      </div>`;
+
+  return `
+  <div class="not-prose">
+    <a href="${url}" target="_blank" rel="noopener noreferrer">
+      <div style="border-radius: 5px; border-width: 1px; overflow: hidden;">
+        ${preview}
+      </div>
+    </a>
+  </div>`;
+});
 // Notion Custom Block Transform END
 
 // Fetch Notion Posts from Database via Notion API
