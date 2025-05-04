@@ -78,7 +78,7 @@ jobs:
         run: npm run generate
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@4
+        uses: actions/upload-pages-artifact@3
         with:
           path: ${{ env.BUILD_PATH }}/dist
 
