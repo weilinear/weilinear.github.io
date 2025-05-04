@@ -19,7 +19,8 @@
       <svelte:fragment slot="paragraph">
         <div class="block">
           <p>
-            I am currently working at <span class="text-primary-200">Microsft</span> as a Sr. Principal Applied Scientist.
+            I am currently working at <span class="text-primary-200">Google</span> as a Senior Staff Software Enginner with a focus on agent platform.
+            I was a Sr. Principal Applied Scientist at <span class="text-primary-200">Microsoft</span> working on LLMs for search.
             I was staff research scientist and manager at <span class="text-primary-200">NewsBreak</span> (series C startup).
             I was a senior research scientist at <span class="text-primary-200">Facebook</span> Seattle & <span class="text-primary-200">Google</span> Research
             in Zurich, Switzerland with a focus on Computer Vision and Ads ranking.
