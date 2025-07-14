@@ -7,6 +7,7 @@
     NavHamburger,
     DarkMode,
   } from "flowbite-svelte";
+  import CompactControls from "../components/CompactMode/CompactControls.svelte";
   import { onMount } from "svelte";
   import { throttle } from "../helpers/throttle";
   import { navbar } from "../stores/layout";
@@ -97,11 +98,15 @@
             >Github</NavLi
           >
         </NavUl>
-        <DarkMode btnClass="ml-4 text-white" size="lg" />
+        <div class="flex items-center">
+          <DarkMode btnClass="ml-4 text-white" size="lg" />
+          <CompactControls />
+        </div>
       </div>
     {:else}
       <div>
         <DarkMode btnClass="ml-4 text-white" size="lg" />
+        <CompactControls />
         <NavHamburger menuClass="text-white" />
       </div>
       <NavUl

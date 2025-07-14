@@ -34,8 +34,24 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
 });
 ---
 
+<script>
+  import { compact } from "../stores/compact";
+  compact.subscribe((value) => {
+    if (typeof document !== "undefined") {
+      document.body.classList.toggle("compact", value);
+    }
+  });
+</script>
+
+<style is:global>
+  body.compact .parallax-image-header {
+    display: none;
+  }
+</style>
+
 <Layout title={frontmatter.title}>
   <div
+    class="parallax-image-header"
     style={`view-transition-name: cover-image-${frontmatter.id}; display:block;`}
   >
     {
