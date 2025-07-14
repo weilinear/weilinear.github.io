@@ -7,7 +7,10 @@ import Tags from "../components/Tags.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import LatestPosts from "../components/LatestPosts.astro";
 import Newsletter from "../components/Newsletter.svelte";
+import { compact } from "../stores/layout";
+import { useStore } from "@nanostores/preact";
 
+const $compact = useStore(compact);
 const { frontmatter } = Astro.props;
 
 const showProfileSubtitle = false; // TODO: Expose this as config option
@@ -39,7 +42,7 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
     style={`view-transition-name: cover-image-${frontmatter.id}; display:block;`}
   >
     {
-      optimizedDesktopCoverImage && (
+      !$compact.show && optimizedDesktopCoverImage && (
         <div class="relative h-fit">
           <ParallaxImageHeader
             mobileImage={optimizedMobileCoverImage.src}

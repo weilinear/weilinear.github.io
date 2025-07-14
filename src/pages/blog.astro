@@ -6,6 +6,10 @@ import TagsFilter from "../components/TagsFilter.svelte";
 import { postImageImport } from "../helpers/images.mjs";
 import { Alert } from "flowbite-svelte";
 import { PenSolid } from "flowbite-svelte-icons";
+import { compact } from "../stores/layout";
+import { useStore } from "@nanostores/preact";
+
+const $compact = useStore(compact);
 
 const POSTS_PATH = "posts";
 const COVER_IMG_ASPECT_RATIO = "13/9"; // TODO: Expose as variable
@@ -142,7 +146,7 @@ const tagsList = posts.reduce((acc, post) => {
                           </Alert>
                         )}
 
-                        {cover && (
+                        {!$compact.show && cover && (
                           <>
                             <img
                               class={`mb-1 h-auto w-full rounded-md rounded-b-none object-cover`}

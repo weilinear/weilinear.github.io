@@ -8,10 +8,12 @@
     Tooltip,
     Button,
   } from "flowbite-svelte";
+  import { compact } from "../../stores/layout";
   let numStarsPercent = 7;
   let hyperDarkSpanEl;
   let mounted = false; // Mounted state allows this to be server-side rendered, improves loading time and helps prevent CLS
   let hyperDark = false;
+  let compactMode = false;
 
   function onSliderChange(ev) {
     const { value } = ev?.target;
@@ -44,12 +46,20 @@
     }
   }
 
+  function onCompactToggle(ev) {
+    const { checked } = ev?.target;
+    localStorage.setItem("compactMode", checked);
+    compact.set({ show: checked });
+  }
+
   let mutationObserver = null;
 
   onMount(() => {
     mounted = true;
 
     hyperDark = localStorage.getItem("hyperDark") === "true";
+    compactMode = localStorage.getItem("compactMode") === "true";
+    compact.set({ show: compactMode });
 
     numStarsPercent =
       localStorage.getItem("numStarsPercent") || numStarsPercent;
@@ -95,6 +105,8 @@
     <div class="flex flex-row">
       <span class="mr-4 text-lg text-white">HyperDark</span>
       <Toggle bind:checked={hyperDark} on:change={onToggle} />
+      <span class="ml-4 mr-4 text-lg text-white">Compact</span>
+      <Toggle bind:checked={compactMode} on:change={onCompactToggle} />
     </div>
     <Label />
     {#if hyperDark}
