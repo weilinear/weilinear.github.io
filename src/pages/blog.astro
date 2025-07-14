@@ -33,6 +33,21 @@ const tagsList = posts.reduce((acc, post) => {
 }, []);
 ---
 
+<script>
+  import { compact } from "../stores/compact";
+  compact.subscribe((value) => {
+    if (typeof document !== "undefined") {
+      document.body.classList.toggle("compact", value);
+    }
+  });
+</script>
+
+<style is:global>
+  body.compact .post-cover-image {
+    display: none;
+  }
+</style>
+
 <Layout title="Blog">
   <main class="">
     <section class="">
@@ -123,6 +138,7 @@ const tagsList = posts.reduce((acc, post) => {
                   >
                     <article class="h-fit transform rounded-lg border border-gray-200 bg-white shadow-md transition duration-100 ease-in dark:border-gray-700 dark:bg-gray-800 sm:hover:scale-[102%] lg:hover:scale-105">
                       <div
+                        class="post-cover-image"
                         style={`view-transition-name: cover-image-${post.frontmatter.id};`}
                       >
                         {post.frontmatter.status !== "published" && (
