@@ -40,11 +40,32 @@ const tagsList = posts.reduce((acc, post) => {
       document.body.classList.toggle("compact", value);
     }
   });
+  document.addEventListener("astro:after-swap", () => {
+    compact.subscribe((value) => {
+      if (typeof document !== "undefined") {
+        document.body.classList.toggle("compact", value);
+      }
+    });
+  });
 </script>
 
 <style is:global>
   body.compact .post-cover-image {
     display: none;
+  }
+  body.compact .post-list {
+    display: block;
+  }
+  body.compact .post-article {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  body.compact .post-article:hover {
+    transform: none;
   }
 </style>
 
@@ -68,7 +89,7 @@ const tagsList = posts.reduce((acc, post) => {
         {showTagsFilter && (showOnlyTag == null) && <TagsFilter tagsList={tagsList} client:load />}
 
         <div
-          class="mt-8 grid items-center gap-8 md:grid-cols-2 lg:mt-16 xl:grid-cols-3"
+          class="post-list mt-8 grid items-center gap-8 md:grid-cols-2 lg:mt-16 xl:grid-cols-3"
         >
           {
             posts
@@ -136,7 +157,7 @@ const tagsList = posts.reduce((acc, post) => {
                         .join(" ")
                     }
                   >
-                    <article class="h-fit transform rounded-lg border border-gray-200 bg-white shadow-md transition duration-100 ease-in dark:border-gray-700 dark:bg-gray-800 sm:hover:scale-[102%] lg:hover:scale-105">
+                    <article class="post-article h-fit transform rounded-lg border border-gray-200 bg-white shadow-md transition duration-100 ease-in dark:border-gray-700 dark:bg-gray-800 sm:hover:scale-[102%] lg:hover:scale-105">
                       <div
                         class="post-cover-image"
                         style={`view-transition-name: cover-image-${post.frontmatter.id};`}
