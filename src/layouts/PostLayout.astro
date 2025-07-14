@@ -36,10 +36,17 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
 
 <script>
   import { compact } from "../stores/compact";
-  compact.subscribe((value) => {
+
+  function setCompactClass(value) {
     if (typeof document !== "undefined") {
       document.body.classList.toggle("compact", value);
     }
+  }
+
+  compact.subscribe(setCompactClass);
+
+  document.addEventListener("astro:after-swap", () => {
+    compact.subscribe(setCompactClass);
   });
 </script>
 
