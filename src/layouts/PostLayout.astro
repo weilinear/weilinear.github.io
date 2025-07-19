@@ -54,6 +54,18 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   body.compact .parallax-image-header {
     display: none !important;
   }
+
+  body.compact .mx-auto.max-w-screen-xl {
+    max-width: 80rem !important;
+  }
+
+  body.compact article.max-w-3xl {
+    max-width: 100% !important;
+  }
+
+  body.compact .format {
+    line-height: 1.4 !important;
+  }
 </style>
 
 <Layout title={frontmatter.title}>
