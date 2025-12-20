@@ -78,6 +78,11 @@ export async function downloadImage(
     }.${ext}`;
   console.info("Hashed Filename:", fileName);
 
+  const dir = path.dirname(fileName);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
   fs.writeFileSync(fileName, buffer);
   console.info(`Image downloaded to ${fileName}`, mime);
 
