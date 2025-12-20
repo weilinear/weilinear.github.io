@@ -1,14 +1,11 @@
 <script>
   import { onMount } from "svelte";
-  import { Toggle } from "flowbite-svelte";
   import { compact } from "../../stores/compact";
 
-  let mounted = false;
-  let isCompact = false;
+  let isCompact = true;
 
-  function onToggle(ev) {
-    const { checked } = ev?.target;
-    isCompact = checked;
+  function toggleCompact() {
+    isCompact = !isCompact;
     compact.set(isCompact);
     if (typeof localStorage !== "undefined") {
       localStorage.setItem("compact", isCompact);
@@ -16,15 +13,22 @@
   }
 
   onMount(() => {
-    mounted = true;
     if (typeof localStorage !== "undefined") {
-      isCompact = localStorage.getItem("compact") === "true";
+      const stored = localStorage.getItem("compact");
+      if (stored !== null) {
+        isCompact = stored === "true";
+      } else {
+        isCompact = true; // Default
+      }
       compact.set(isCompact);
     }
   });
 </script>
 
-<div class="flex items-center">
-  <span class="mr-4 text-lg text-white">Compact Mode</span>
-  <Toggle bind:checked={isCompact} on:change={onToggle} />
-</div>
+<button
+  on:click={toggleCompact}
+  class="ml-2 px-3 py-1 rounded-md border border-transparent hover:border-white/50 hover:bg-white/10 text-[15px] font-bold text-white transition-all"
+  aria-label="Toggle Compact Mode"
+>
+  {isCompact ? "Compact" : "Full"}
+</button>

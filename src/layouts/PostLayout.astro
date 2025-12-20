@@ -67,7 +67,41 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   }
 
   body.compact .format {
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
+    font-size: 1rem !important;
+  }
+
+  /* Compact Heading Sizes */
+  body.compact .format h1,
+  body.compact .format h2,
+  body.compact .format h3,
+  body.compact .format h4,
+  body.compact .format h5,
+  body.compact .format h6 {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+  }
+
+  body.compact .format h1 { font-size: 1.5rem !important; }
+  body.compact .format h2 { font-size: 1.35rem !important; }
+  body.compact .format h3 { font-size: 1.2rem !important; }
+  body.compact .format h4 { font-size: 1.1rem !important; }
+  body.compact .format h5 { font-size: 1rem !important; }
+  body.compact .format h6 { font-size: 1rem !important; }
+
+  /* Post Title in compact mode */
+  body.compact header .text-xl {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Adjust spacing for paragraphs and lists */
+  body.compact .format p,
+  body.compact .format ul,
+  body.compact .format ol {
+    margin-bottom: 0.75rem !important;
   }
 </style>
 

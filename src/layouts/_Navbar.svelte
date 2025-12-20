@@ -5,9 +5,9 @@
     NavLi,
     NavUl,
     NavHamburger,
-    DarkMode,
   } from "flowbite-svelte";
   import CompactControls from "../components/CompactMode/CompactControls.svelte";
+  import ThemeToggle from "../components/ThemeToggle.svelte";
   import { onMount } from "svelte";
   import { throttle } from "../helpers/throttle";
   import { navbar } from "../stores/layout";
@@ -99,13 +99,13 @@
           >
         </NavUl>
         <div class="flex items-center">
-          <DarkMode btnClass="ml-4 text-white" size="lg" />
+          <ThemeToggle />
           <CompactControls />
         </div>
       </div>
     {:else}
       <div>
-        <DarkMode btnClass="ml-4 text-white" size="lg" />
+        <ThemeToggle />
         <CompactControls />
         <NavHamburger menuClass="text-white" />
       </div>
