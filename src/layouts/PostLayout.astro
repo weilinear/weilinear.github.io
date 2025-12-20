@@ -63,7 +63,10 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   body.compact article.max-w-3xl {
     max-width: 100% !important;
     margin-top: 1%; /* Adjust this value to match your navbar's height */
+  }
 
+  body.compact header {
+    margin-bottom: 1rem !important;
   }
 
   body.compact .format {
@@ -78,8 +81,8 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   body.compact .format h4,
   body.compact .format h5,
   body.compact .format h6 {
-    margin-top: 1rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
     font-weight: 600 !important;
     line-height: 1.2 !important;
   }
@@ -101,7 +104,7 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   body.compact .format p,
   body.compact .format ul,
   body.compact .format ol {
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
   }
 </style>
 
