@@ -12,33 +12,33 @@
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const filterPostsVisibility = (event) => {
-    // Since Blog components are built via Astro (required to use View Transitions),
-    // They cannot directly have client-side reactivity like Svelte components
-    // Add reactivity via CSS by hiding posts that don't match the selected tags
-    document.startViewTransition(() => {
+    const updateDOM = () => {
       if (selected.length === 0) {
         document.querySelectorAll(".post-link-container").forEach((el) => {
           el.classList.remove("hidden");
         });
-
         return;
       }
 
       document.querySelectorAll(".post-link-container").forEach((el) => {
         let shouldBeVisible = false;
-
         for (const tag of selected) {
-          if (el.classList.contains(`post-link-tag-${tag}`))
+          if (el.classList.contains(`post-link-tag-${tag}`)) {
             shouldBeVisible = true;
+            break;
+          }
         }
-
         shouldBeVisible
           ? el.classList.remove("hidden")
           : el.classList.add("hidden");
       });
+    };
 
-      document.querySelector("#tags-select-container > div").click(); // Can't get ref of div component directly since it's hidden buried inside framework
-    });
+    if (document.startViewTransition) {
+      document.startViewTransition(updateDOM);
+    } else {
+      updateDOM();
+    }
   };
 </script>
 
