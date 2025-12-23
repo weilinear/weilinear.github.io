@@ -12,6 +12,29 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - uses: gautamkrishnar/keepalive-workflow@v1
         with:
-          commit_message: "Automated keepalive [skip ci]"
+          fetch-depth: 0 # Fetch all history so we can check dates
+
+      - name: Check inactivity and commit
+        run: |
+          # Configure git to use the GitHub Actions bot
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Get the timestamp of the last commit
+          last_commit_date=$(git log -1 --format=%ct)
+          now=$(date +%s)
+          
+          # Calculate days since last commit
+          days_since_last_commit=$(( (now - last_commit_date) / 86400 ))
+          echo "Days since last commit: $days_since_last_commit"
+
+          # Only commit if no activity for 50 days (GitHub disables at 60)
+          if [ $days_since_last_commit -lt 50 ]; then
+            echo "Recent activity detected. No keepalive needed."
+            exit 0
+          fi
+
+          # Create an empty commit to reset the timer
+          git commit --allow-empty -m "Automated keepalive [skip ci]"
+          git push
