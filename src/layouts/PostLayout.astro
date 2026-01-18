@@ -242,8 +242,10 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   
   /* MathJax Fixes */
   mjx-container[jax="SVG"] {
-    display: inline-block;
+    display: -webkit-inline-box;
+    display: inline-flex;
     direction: ltr;
+    vertical-align: middle;
   }
   mjx-container[jax="SVG"][display="true"] {
     display: block;
