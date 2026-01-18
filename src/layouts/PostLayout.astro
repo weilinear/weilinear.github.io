@@ -239,4 +239,15 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
   blockquote code {
     color: white !important;
   }
+  
+  /* MathJax Fixes */
+  mjx-container[jax="SVG"] {
+    display: inline-block;
+    direction: ltr;
+  }
+  mjx-container[jax="SVG"][display="true"] {
+    display: block;
+    text-align: center;
+    margin: 1em 0;
+  }
 </style>
