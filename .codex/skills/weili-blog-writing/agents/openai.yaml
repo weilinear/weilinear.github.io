@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wei Li Blog Writing"
+  short_description: "Draft and publish technical posts in Wei’s voice"
+  default_prompt: "Use $weili-blog-writing to turn this work into a candid technical blog post."
