@@ -30,13 +30,12 @@ const { fullWidth = true, animated = false } = Astro.props;
         latestPosts.map(async (post) => {
           const { title, cover, slug, id, reading_time, description } =
             post.frontmatter;
-          let imageFilePath = (await postImageImport(cover)).default;
-
           let coverImageSrc = "";
           let preloadCoverImageSrc = "";
           let preloadCoverImageMobileSrc = "";
 
           if (cover) {
+            const imageFilePath = (await postImageImport(cover)).default;
             coverImageSrc = (
               await getImage({
                 src: imageFilePath,
