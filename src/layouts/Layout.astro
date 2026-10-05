@@ -20,8 +20,10 @@ const { title } = Astro.props;
     <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXZ99MYCE4" is:inline
-    ></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZXZ99MYCE4"
+      is:inline></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -33,15 +35,32 @@ const { title } = Astro.props;
     </script>
 
     <style is:global>
-      /* Code Block Styling Overrides */
-      code {
-        color: white !important;
+      :root {
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
       }
-      li code {
-        color: white !important;
+
+      :not(pre) > code {
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        background: #f3f4f6;
+        color: #7f1d1d !important;
+        padding: 0.08em 0.32em;
+        font-size: 0.88em;
+        font-weight: 500;
       }
-      blockquote code {
-        color: white !important;
+
+      html.dark :not(pre) > code {
+        border-color: #374151;
+        background: #111827;
+        color: #f9a8d4 !important;
+      }
+
+      pre code {
+        border: 0;
+        background: transparent;
+        color: inherit !important;
+        padding: 0;
       }
     </style>
 
@@ -60,6 +79,12 @@ const { title } = Astro.props;
       const colorTheme = localStorage.getItem("color-theme");
       const isDark = colorTheme === "dark";
       document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      const compactPreference = localStorage.getItem("compact");
+      document.documentElement.classList.toggle(
+        "compact",
+        compactPreference !== "false",
+      );
     </script>
   </head>
 

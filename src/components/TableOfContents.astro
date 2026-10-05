@@ -1,5 +1,4 @@
 ---
-import { Card } from "flowbite-svelte";
 import { twMerge } from "tailwind-merge";
 
 const {
@@ -8,10 +7,7 @@ const {
   aClass = "no-underline dark:text-gray-400",
 } = Astro.props;
 
-const cardClass = twMerge(
-  "format -mt-8 h-fit w-fit !p-4 !pb-0 animate-jump-in animate-duration-700 animate-ease-in animate-normal",
-  Astro.props.cardClass,
-);
+const cardClass = twMerge("toc h-fit w-full", Astro.props.cardClass);
 
 function tableOfContents() {
   if (headings.length === 0) {
@@ -54,7 +50,57 @@ function tableOfContents() {
 }
 ---
 
-<Card class={cardClass}>
-  <span class="text-center text-xl font-semibold">Table of Contents</span>
+<nav class={cardClass} aria-label="Table of contents">
+  <span class="toc-title">On this page</span>
   <div set:html={tableOfContents()} />
-</Card>
+</nav>
+
+<style>
+  .toc {
+    border-left: 1px solid rgb(209 213 219);
+    padding-left: 1rem;
+  }
+
+  :global(.dark) .toc {
+    border-color: rgb(55 65 81);
+  }
+
+  .toc-title {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: rgb(107 114 128);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .toc :global(ol) {
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  .toc :global(li) {
+    margin: 0.42rem 0;
+    color: rgb(156 163 175);
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .toc :global(a) {
+    color: rgb(75 85 99);
+    text-decoration: none;
+  }
+
+  .toc :global(a:hover) {
+    color: rgb(37 99 235);
+  }
+
+  :global(.dark) .toc :global(a) {
+    color: rgb(156 163 175);
+  }
+
+  :global(.dark) .toc :global(a:hover) {
+    color: rgb(147 197 253);
+  }
+</style>

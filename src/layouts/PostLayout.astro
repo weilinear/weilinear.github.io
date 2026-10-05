@@ -7,7 +7,7 @@ import Tags from "../components/Tags.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import LatestPosts from "../components/LatestPosts.astro";
 import Newsletter from "../components/Newsletter.svelte";
-import Giscus from "../components/Giscus.astro"; 
+import Giscus from "../components/Giscus.astro";
 
 const { frontmatter } = Astro.props;
 
@@ -35,76 +35,119 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
 });
 ---
 
-<script>
-  import { compact } from "../stores/compact";
-
-  function setCompactClass(value) {
-    if (typeof document !== "undefined") {
-      document.body.classList.toggle("compact", value);
-    }
-  }
-
-  compact.subscribe(setCompactClass);
-
-  document.addEventListener("astro:after-swap", () => {
-    compact.subscribe(setCompactClass);
-  });
-</script>
-
 <style is:global>
-  body.compact .parallax-image-header {
+  html.compact .parallax-image-header {
     display: none !important;
   }
 
-  body.compact .mx-auto.max-w-screen-xl {
-    max-width: 80rem !important;
+  html.compact .post-main {
+    padding-top: 2rem !important;
   }
 
-  body.compact article.max-w-3xl {
-    max-width: 100% !important;
-    margin-top: 1%; /* Adjust this value to match your navbar's height */
+  html.compact .post-shell {
+    align-items: flex-start;
+    max-width: 76rem !important;
+    gap: 3.5rem;
   }
 
-  body.compact header {
+  html.compact .post-content {
+    max-width: 52rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    overflow: visible;
+  }
+
+  html.compact .post-header {
+    margin-bottom: 1.75rem !important;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  html.dark.compact .post-header {
+    border-color: #374151;
+  }
+
+  html.compact .post-date-wrap {
+    margin-bottom: 0.65rem !important;
+  }
+
+  html.compact .post-date {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  html.compact .post-title {
+    max-width: 20ch;
+    margin-bottom: 1rem !important;
+    font-size: clamp(2rem, 4vw, 2.55rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em;
+  }
+
+  html.compact .post-content.format {
+    font-size: 1rem !important;
+    line-height: 1.72 !important;
+  }
+
+  html.compact .post-content.format h2 {
+    margin-top: 2.35rem !important;
+    margin-bottom: 0.8rem !important;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.015em;
+  }
+
+  html.dark.compact .post-content.format h2 {
+    border-color: #374151;
+  }
+
+  html.compact .post-content.format h3 {
+    margin-top: 1.8rem !important;
+    margin-bottom: 0.6rem !important;
+    font-size: 1.12rem !important;
+    line-height: 1.35 !important;
+  }
+
+  html.compact .post-content.format p,
+  html.compact .post-content.format ul,
+  html.compact .post-content.format ol {
+    margin-top: 0 !important;
     margin-bottom: 1rem !important;
   }
 
-  body.compact .format {
-    line-height: 1.5 !important;
-    font-size: 1rem !important;
+  html.compact .post-content.format pre,
+  html.compact .post-content.format table,
+  html.compact .post-content.format blockquote {
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
   }
 
-  /* Compact Heading Sizes */
-  body.compact .format h1,
-  body.compact .format h2,
-  body.compact .format h3,
-  body.compact .format h4,
-  body.compact .format h5,
-  body.compact .format h6 {
-    margin-top: 0.75rem !important;
-    margin-bottom: 0.25rem !important;
-    font-weight: 600 !important;
-    line-height: 1.2 !important;
+  html.compact .post-content.format table {
+    font-size: 0.88rem;
   }
 
-  body.compact .format h1 { font-size: 1.5rem !important; }
-  body.compact .format h2 { font-size: 1.35rem !important; }
-  body.compact .format h3 { font-size: 1.2rem !important; }
-  body.compact .format h4 { font-size: 1.1rem !important; }
-  body.compact .format h5 { font-size: 1rem !important; }
-  body.compact .format h6 { font-size: 1rem !important; }
-
-  /* Post Title in compact mode */
-  body.compact header .text-xl {
-    font-size: 1.75rem !important;
-    line-height: 1.2 !important;
+  html.compact .post-content.format th,
+  html.compact .post-content.format td {
+    padding: 0.5rem 0.65rem;
   }
 
-  /* Adjust spacing for paragraphs and lists */
-  body.compact .format p,
-  body.compact .format ul,
-  body.compact .format ol {
-    margin-bottom: 0.5rem !important;
+  html.compact .post-toc {
+    width: 16rem !important;
+    padding-top: 0.35rem;
+  }
+
+  html.compact .post-toc > * {
+    top: 1.5rem;
   }
 </style>
 
@@ -126,53 +169,68 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
     }
   </div>
 
-  <main class="pt-8 antialiased lg:pt-16">
-    <div class="mx-auto flex max-w-screen-xl justify-center gap-12 px-4">
+  <main class="post-main pt-8 antialiased lg:pt-16">
+    <div
+      class="post-shell mx-auto flex max-w-screen-xl justify-center gap-12 px-4"
+    >
       <article
-        class={`z-40 w-full max-w-3xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert overflow-x-hidden ${
+        class={`post-content z-40 w-full max-w-3xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert overflow-x-hidden ${
           frontmatter.cover ? "lg:my-[-128px]" : ""
         } bg-white dark:bg-gray-800 dark:border-gray-700 outline outline-[20px] outline-white dark:outline-gray-800 rounded-sm lg:shadow-4xl lg:-mb-8`}
         style={`view-transition-name: cover-title-${frontmatter.id};`}
       >
-        <header class="not-format mb-4 lg:mb-6">
-          <address class="mb-6 flex items-center not-italic">
+        <header class="post-header not-format mb-4 lg:mb-6">
+          <address class="post-date-wrap mb-6 flex items-center not-italic">
             <div
               class="mr-3 inline-flex items-center text-sm text-gray-900 dark:text-white"
             >
-            { showProfileAtAll ? 
-              (
-                showProfileSubtitle ? (
-                  <div>
-                    <a
-                      href="#"
-                      rel="author"
-                      class="text-xl font-bold text-gray-900 dark:text-white"
-                    >
-                      Fizzbuzz Aldrin
-                    </a>
-                    <p class="text-base text-gray-500 dark:text-gray-400">
-                      Moonwalker, tech educator & CTO AstroNot
-                    </p>
-                    <p class="text-base text-gray-500 dark:text-gray-400">
-                      <time
-                        pubdate
-                        datetime={frontmatter.created_time}
-                        title={dateStr}
+              {
+                showProfileAtAll ? (
+                  showProfileSubtitle ? (
+                    <div>
+                      <a
+                        href="#"
+                        rel="author"
+                        class="text-xl font-bold text-gray-900 dark:text-white"
                       >
-                        {dateStr}
-                      </time>
-                    </p>
-                  </div>
+                        Fizzbuzz Aldrin
+                      </a>
+                      <p class="text-base text-gray-500 dark:text-gray-400">
+                        Moonwalker, tech educator & CTO AstroNot
+                      </p>
+                      <p class="text-base text-gray-500 dark:text-gray-400">
+                        <time
+                          pubdate
+                          datetime={frontmatter.created_time}
+                          title={dateStr}
+                        >
+                          {dateStr}
+                        </time>
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <a
+                        href="#"
+                        rel="author"
+                        class="text-2xl font-bold text-gray-900 dark:text-white"
+                      >
+                        Fizzbuzz Aldrin
+                      </a>
+                      <p class="text-lg text-gray-500 dark:text-gray-400">
+                        <time
+                          pubdate
+                          datetime={frontmatter.created_time}
+                          title={dateStr}
+                        >
+                          {dateStr}
+                        </time>
+                      </p>
+                    </div>
+                  )
                 ) : (
                   <div>
-                    <a
-                      href="#"
-                      rel="author"
-                      class="text-2xl font-bold text-gray-900 dark:text-white"
-                    >
-                      Fizzbuzz Aldrin
-                    </a>
-                    <p class="text-lg text-gray-500 dark:text-gray-400">
+                    <p class="post-date text-base text-gray-500 dark:text-gray-400">
                       <time
                         pubdate
                         datetime={frontmatter.created_time}
@@ -183,27 +241,15 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
                     </p>
                   </div>
                 )
-              ) : (
-              <div>
-                <p class="text-base text-gray-500 dark:text-gray-400">
-                  <time
-                    pubdate
-                    datetime={frontmatter.created_time}
-                    title={dateStr}
-                  >
-                    {dateStr}
-                  </time>
-                </p>
-              </div>
-            )}
+              }
             </div>
           </address>
 
-          <div
-            class="mb-4 text-xl font-extrabold leading-tight text-gray-900 dark:text-white sm:text-[1.66rem] lg:mb-6 lg:text-[2.66rem]"
+          <h1
+            class="post-title mb-4 text-xl font-extrabold leading-tight text-gray-900 dark:text-white sm:text-[1.66rem] lg:mb-6 lg:text-[2.66rem]"
           >
             {frontmatter.title}
-          </div>
+          </h1>
 
           <Tags tags={frontmatter.tags} divClass="mb-[-10px] mt-[-10px]" />
         </header>
@@ -213,10 +259,10 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
 
       {
         Astro.props.headings.length > 0 && (
-          <aside class="hidden xl:block xl:w-[350px]">
+          <aside class="post-toc hidden xl:block xl:w-[350px]">
             <TableOfContents
               headings={Astro.props.headings}
-              cardClass="format -mt-8 h-fit w-fit !p-4 !pb-0 sticky top-0 w-full"
+              cardClass="sticky top-0 w-full"
             />
           </aside>
         )
@@ -230,16 +276,6 @@ const dateStr = new Date(frontmatter.publish_date).toLocaleString("en-US", {
 </Layout>
 
 <style is:global>
-  code {
-    color: white !important;
-  }
-  li code {
-    color: white !important;
-  }
-  blockquote code {
-    color: white !important;
-  }
-  
   /* MathJax Fixes */
   mjx-container[jax="SVG"] {
     display: -webkit-inline-box;
