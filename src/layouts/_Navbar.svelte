@@ -99,6 +99,11 @@
           >
         </NavUl>
         <div class="flex items-center">
+          <a
+            href="https://weilinear.substack.com/subscribe?utm_source=blog&utm_medium=website&utm_campaign=navbar"
+            class="subscribe-link"
+            aria-label="Subscribe to Wei Li by email">Subscribe</a
+          >
           <ThemeToggle />
           <CompactControls />
         </div>
@@ -118,8 +123,34 @@
         <NavLi class="cursor-pointer" href="/blog">Blog</NavLi>
 
         <NavLi href="/about">About</NavLi>
+        <NavLi
+          href="https://weilinear.substack.com/subscribe?utm_source=blog&utm_medium=website&utm_campaign=mobile_nav"
+          >Subscribe</NavLi
+        >
         <!-- <NavLi href="/contact">Contact</NavLi> -->
       </NavUl>
     {/if}
   </Navbar>
 {/key}
+
+<style>
+  .subscribe-link {
+    margin-right: 0.5rem;
+    padding: 0.42rem 0.8rem;
+    border: 1px solid rgb(255 255 255 / 0.45);
+    border-radius: 9999px;
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 120ms ease,
+      border-color 120ms ease;
+  }
+
+  .subscribe-link:hover {
+    border-color: white;
+    background: rgb(255 255 255 / 0.12);
+  }
+</style>

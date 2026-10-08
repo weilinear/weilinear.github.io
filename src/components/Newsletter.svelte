@@ -1,88 +1,148 @@
-<script>
-  import { Section, Newsletter } from "flowbite-svelte-blocks";
-  import { Input, Button, Label, Modal } from "flowbite-svelte";
-  import { EnvelopeSolid } from "flowbite-svelte-icons";
-
-  let email = "";
-  let defaultModal = false;
-
-  $: isEmailValid = email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  $: emailColor = email.length === 0 ? "base" : isEmailValid ? "green" : "red";
-</script>
-
-<Section>
-  <Newsletter>
-    <svelte:fragment slot="h2">Sign up for the newsletter</svelte:fragment>
-    <p
-      class="mx-auto mb-8 max-w-2xl font-light text-gray-500 dark:text-gray-400 sm:text-xl md:mb-12"
-    >
-      Enter an e-mail address to test out form validation and Flowbite modal via
-      reactive Svelte components. This form does <span class="font-bold"
-        >not</span
-      > collect any data.
+<section class="newsletter-cta" aria-labelledby="newsletter-heading">
+  <div class="newsletter-copy">
+    <p class="newsletter-label">Email updates</p>
+    <h2 id="newsletter-heading">Get the next post, not another feed.</h2>
+    <p>
+      I write about AI agents, software systems, investing, and experiments that
+      survived contact with reality. One email when I publish something worth
+      sharing.
     </p>
-
-    <form
-      on:submit={(e) => {
-        defaultModal = !defaultModal;
-        e.preventDefault();
-      }}
+    <a
+      href="https://weilinear.substack.com/subscribe?utm_source=blog&utm_medium=website&utm_campaign=article_cta"
+      class="newsletter-link"
     >
-      <div
-        class="mx-auto mb-3 max-w-screen-sm items-center space-y-4 sm:flex sm:space-y-0"
-      >
-        <div class="relative w-full">
-          <Label class="hidden">Email address</Label>
-          <Input
-            id="email"
-            type="email"
-            color={emailColor}
-            placeholder="buzz@astronot.com"
-            size="md"
-            bind:value={email}
-            class="block w-full rounded-lg border border-gray-300 p-3 pl-10 text-sm focus:border-primary-500 focus:ring-primary-500 sm:rounded-none sm:rounded-l-lg"
-          >
-            <EnvelopeSolid
-              slot="left"
-              size="sm"
-              class="ml-2 text-gray-500 dark:text-gray-400"
-            />
-          </Input>
-        </div>
-        <div>
-          <Button
-            type="submit"
-            class="w-full cursor-pointer rounded-lg border border-primary-600 bg-primary-300 px-5 py-3 text-center text-sm font-medium text-white focus:ring-4 dark:focus:ring-primary-800  sm:rounded-none sm:rounded-r-lg"
-            disabled={!isEmailValid}>Subscribe</Button
-          >
-        </div>
-      </div>
-      <div
-        class="newsletter-form-footer mx-auto max-w-screen-sm text-left text-sm text-gray-500 dark:text-gray-300"
-      >
-        We care about the protection of your data. <a
-          href="/"
-          class="font-medium text-primary-600 hover:underline dark:text-primary-400"
-          >Read our Privacy Policy</a
-        >.
-      </div>
-    </form>
-  </Newsletter>
-</Section>
+      Open the signup page <span aria-hidden="true">→</span>
+    </a>
+  </div>
 
-<Modal title="Flowbite Modal Test" bind:open={defaultModal} autoclose>
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-    Normally this would subscribe <span class="font-extrabold">{email}</span> to
-    an e-mail list, but this is just a test for form validation and this interactive
-    Modal component.
+  <div class="newsletter-embed">
+    <iframe
+      src="https://weilinear.substack.com/embed"
+      width="480"
+      height="320"
+      title="Subscribe to Wei Li on Substack"
+      frameborder="0"
+      scrolling="no"
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <p class="newsletter-note">
+    Email delivery is handled by Substack. Unsubscribe at any time.
   </p>
-  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-    Modals are just one of many available interactive Flowbite components
-    already included in AstroNot. Check out the documentation for more details
-    on Flowbite and Svelte components!
-  </p>
-  <svelte:fragment slot="footer">
-    <Button on:click={() => alert('Handle "success"')}>I accept</Button>
-    <Button color="alternative">Decline</Button>
-  </svelte:fragment>
-</Modal>
+</section>
+
+<style>
+  .newsletter-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 30rem);
+    gap: 2rem 3rem;
+    align-items: center;
+    max-width: 72rem;
+    margin: 3rem auto;
+    padding: 2rem;
+    border: 1px solid rgb(229 231 235);
+    border-radius: 0.75rem;
+    background: rgb(249 250 251);
+  }
+
+  :global(.dark) .newsletter-cta {
+    border-color: rgb(55 65 81);
+    background: rgb(17 24 39);
+  }
+
+  .newsletter-label {
+    margin: 0 0 0.6rem;
+    color: rgb(107 114 128);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 17ch;
+    margin: 0;
+    color: rgb(17 24 39);
+    font-size: clamp(1.55rem, 3vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  :global(.dark) h2 {
+    color: rgb(249 250 251);
+  }
+
+  .newsletter-copy > p:not(.newsletter-label) {
+    max-width: 35rem;
+    margin: 1rem 0;
+    color: rgb(75 85 99);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  :global(.dark) .newsletter-copy > p:not(.newsletter-label) {
+    color: rgb(156 163 175);
+  }
+
+  .newsletter-link {
+    color: rgb(37 99 235);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .newsletter-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  :global(.dark) .newsletter-link {
+    color: rgb(147 197 253);
+  }
+
+  .newsletter-embed {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgb(229 231 235);
+    border-radius: 0.5rem;
+    background: white;
+  }
+
+  .newsletter-embed iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    background: white;
+  }
+
+  .newsletter-note {
+    grid-column: 1 / -1;
+    margin: -0.75rem 0 0;
+    color: rgb(107 114 128);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 767px) {
+    .newsletter-cta {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 1rem;
+      padding: 1.25rem;
+    }
+
+    .newsletter-note {
+      grid-column: 1;
+      margin-top: -0.35rem;
+    }
+  }
+
+  :global(html.compact) .newsletter-cta {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+</style>
